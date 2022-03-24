@@ -172,7 +172,7 @@ if (process.env.NOTIFY_SHOWNAMETYPE) {
     if (ShowRemarkType == "4")
         console.log("检测到显示备注名称，格式为: 备注");
 }
-async function sendNotify (text, desp, params = {}, author = '\n\n本通知 By ccwav Mod', strsummary = "") {
+async function sendNotify (text, desp, params = {}, author = '\n\n本通知 By：FengYun27', strsummary = "") {
     console.log(`开始发送通知...`);
 
     //NOTIFY_FILTERBYFILE代码来自Ca11back.
