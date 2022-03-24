@@ -4,13 +4,13 @@
 
 国内
 ```shell
-ql repo https://github.91chi.fun//https://github.com/FengYun27/Sheep_Hair.git "" "jdcookie|USER_AGENTS|TS_USER_AGENTS|sign_graphics_validate|Env" "ql|sendNotify|utils"
+ql repo https://github.91chi.fun//https://github.com/FengYun27/Sheep_Hair.git "" "jdcookie|USER_AGENTS|TS_USER_AGENTS|sign_graphics_validate|Env" "ql|sendNotify"
 
 30 0/15 * * * ? 
 ```
 国外
 ```shell
-ql repo https://github.91chi.fun//https://github.com/FengYun27/Sheep_Hair.git "" "jdcookie|USER_AGENTS|TS_USER_AGENTS|sign_graphics_validate|Env" "ql|sendNotify|utils"
+ql repo https://github.91chi.fun//https://github.com/FengYun27/Sheep_Hair.git "" "jdcookie|USER_AGENTS|TS_USER_AGENTS|sign_graphics_validate|Env" "ql|sendNotify"
 
 30 0/15 * * * ? 
 ```
