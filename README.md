@@ -37,9 +37,6 @@ ql raw https://github.91chi.fun//https://raw.githubusercontent.com/FengYun27/She
 - 快手极速版 left_ksjsb.js
 - 腾讯自选股v2 left_txzzg.js
 
-### 临时羊毛活动
-- 顺丰——乘风寻宝记 fz_sfxbj.js
-
 ## 依赖
 ### NodeJs
 - axios
