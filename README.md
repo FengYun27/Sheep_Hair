@@ -4,13 +4,13 @@
 
 国内
 ```shell
-ql repo https://github.91chi.fun//https://github.com/FengYun27/Sheep_Hair.git "" "jdcookie|USER_AGENTS|TS_USER_AGENTS|sign_graphics_validate|Env" "ql|sendNotify"
+ql repo https://github.91chi.fun//https://github.com/FengYun27/Sheep_Hair.git "" "" "ql|sendNotify"
 
 30 0/15 * * * ? 
 ```
 国外
 ```shell
-ql repo https://github.91chi.fun//https://github.com/FengYun27/Sheep_Hair.git "" "jdcookie|USER_AGENTS|TS_USER_AGENTS|sign_graphics_validate|Env" "ql|sendNotify"
+ql repo https://github.91chi.fun//https://github.com/FengYun27/Sheep_Hair.git "" "" "ql|sendNotify"
 
 30 0/15 * * * ? 
 ```
@@ -32,18 +32,18 @@ ql raw https://github.91chi.fun//https://raw.githubusercontent.com/FengYun27/She
 ## 羊毛
 - 广汽三菱 gqsl.js
 - 滴滴果园 left_ddgy.js
-- 滴滴果园刷水滴 tom_ddgyssd.js
 - 快手普通版 left_ks.js
 - 快手极速版 left_ksjsb.js
 - 腾讯自选股v2 left_txzzg.js
-
+- 抖音果园 yml_dygy.js
 ## 依赖
 ### NodeJs
 - axios
-- ts-md5
 - jsdom
-- png-js
+- ts-md5
 - moment
+- png-js
+- date-fns
 ### Python
 - PyExecJS
 - json5
