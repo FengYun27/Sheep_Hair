@@ -33,10 +33,15 @@ ql raw https://github.91chi.fun//https://raw.githubusercontent.com/FengYun27/She
 - 抖音果园 m_dygy.js
 - 滴滴果园 m_ddgy.js
 - 广汽三菱 m_gqsl.js
-- 快手水果 m_ks_fruit.js
 - 快手普通版 m_ks.js
 - 快手极速版 m_ksjsb.js
 - 腾讯自选股v2 m_txzzg.js
+- [快手水果](#快手水果)
+### 第三方
+#### 快手水果
+```shell
+ql repo ttps://github.91chi.fun//https://github.com/passerby-b/ks_fruit.git
+```
 
 ## 依赖
 ### NodeJs
