@@ -4,13 +4,13 @@
 
 国内
 ```shell
-ql repo https://github.91chi.fun//https://github.com/FengYun27/Sheep_Hair.git "" "" "ql|sendNotify"
+ql repo https://github.91chi.fun//https://github.com/FengYun27/Sheep_Hair.git "m_" "expire" "ql|sendNotify|root|untitled"
 
 30 0/15 * * * ? 
 ```
 国外
 ```shell
-ql repo https://github.91chi.fun//https://github.com/FengYun27/Sheep_Hair.git "" "" "ql|sendNotify"
+ql repo https://github.com/FengYun27/Sheep_Hair.git "m_" "expire" "ql|sendNotify|root|untitled"
 
 30 0/15 * * * ? 
 ```
@@ -30,12 +30,15 @@ ql raw https://github.91chi.fun//https://raw.githubusercontent.com/FengYun27/She
 ```
 
 ## 羊毛
-- 广汽三菱 gqsl.js
-- 滴滴果园 left_ddgy.js
-- 快手普通版 left_ks.js
-- 快手极速版 left_ksjsb.js
-- 腾讯自选股v2 left_txzzg.js
-- 抖音果园 yml_dygy.js
+- 抖音果园 m_dygy.js
+- 滴滴果园 m_ddgy.js
+- 抖音极速 m_dyjs.js
+- 广汽三菱 m_gqsl.js
+- 快手水果 m_ks_fruit.js
+- 快手普通版 m_ks.js
+- 快手极速版 m_ksjsb.js
+- 腾讯自选股v2 m_txzzg.js
+
 ## 依赖
 ### NodeJs
 - axios
@@ -44,6 +47,7 @@ ql raw https://github.91chi.fun//https://raw.githubusercontent.com/FengYun27/She
 - moment
 - png-js
 - date-fns
+
 ### Python
 - PyExecJS
 - json5

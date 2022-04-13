@@ -1,6 +1,7 @@
 /**
  * 抖音果园 
  * cron 10,40 8,12,17,23 * * *  yml2213_javascript_master/dygy.js
+ * cron "2 0,8,12,18 * * *" script-path=https://raw.githubusercontent.com/FengYun27/Sheep_Hair/main/m_dygy.js
  * 
  * 抖音果园   入口：抖音点击"我"- "抖音商城" - "果园"   有的号可能没有 ，暂时不知道原因
  * 3-29    签到任务、新手彩蛋、每日免费领水滴、三餐礼包、宝箱、盒子领取  初步完成   脚本刚写完，难免有bug，请及时反馈  ；ck有效期测试中 
