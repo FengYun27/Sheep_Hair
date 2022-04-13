@@ -32,7 +32,6 @@ ql raw https://github.91chi.fun//https://raw.githubusercontent.com/FengYun27/She
 ## 羊毛
 - 抖音果园 m_dygy.js
 - 滴滴果园 m_ddgy.js
-- 抖音极速 m_dyjs.js
 - 广汽三菱 m_gqsl.js
 - 快手水果 m_ks_fruit.js
 - 快手普通版 m_ks.js
