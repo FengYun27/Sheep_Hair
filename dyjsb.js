@@ -17,15 +17,13 @@ let envSplitor = ['#']
 $.idx = ($.idx = ($.isNode() ? process.env.dyjsb_count : $.getdata('dyjsb_count')) || '1' - 1) > 0 ? `${$.idx + 1}` : ""; // 账号扩展字符
 
 let fengyun_dyjsb_cookie = ($.isNode() ? process.env.fengyun_dyjsb_signcookie : $.getdata('fengyun_dyjsb_cookie')) || '';
-let fengyun_dyjsb_host =($.isNode() ? process.env.fengyun_dyjsb_host : $.getdata('fengyun_dyjsb_host')) || '';
+let fengyun_dyjsb_host = ($.isNode() ? process.env.fengyun_dyjsb_host : $.getdata('fengyun_dyjsb_host')) || 'api5-normal-c-lq.amemv.com';
 
 let userList = []
 let userIdx = 0
 let userCount = 0
 
-const signheaderArr = [], signcookieArr = []
-const stepheaderArr = [], stepkeyArr = []
-const readheaderArr = [], readkeyArr = []
+const cookieArr = [];
 
 !(async () => {
     if (typeof $request !== "undefined") {
@@ -54,7 +52,7 @@ async function GetRewrite() {
         const dyhost = $request.headers['Host']
         if (cookie) {
             let data = $.getdata('fengyun_dyjsb_cookie')
-            if (data) {
+            if (!data) {
                 $.setdata(data + '#' + cookie, `fengyun_dyjsb_cookie`)
             } else {
                 $.setdata(cookie, `fengyun_dyjsb_cookie`)
@@ -64,7 +62,7 @@ async function GetRewrite() {
         }
         if (dyhost) {
             let data = $.getdata('fengyun_dyjsb_host')
-            if (!data) {
+            if (data) {
                 $.setdata(dyhost, `fengyun_dyjsb_host`)
             }
             $.log(`[${$.name}] 获取host请求成功 stepheader:\n${dyhost}\n`)
@@ -78,23 +76,23 @@ async function CheckEnv() {
     //console.log(`============ 脚本执行-北京时间(UTC+8)：${new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toLocaleString()}  =============\n`)
     $.log(`该脚本的所有环境变量只能用 # 隔开`)
 
-    if (fengyun_dyjsb_signheader) {
+    if (fengyun_dyjsb_cookie) {
         let splitor = envSplitor[0];
         for (let sp of envSplitor) {
-            if (fengyun_dyjsb_signheader.indexOf(sp) > -1) {
+            if (fengyun_dyjsb_cookie.indexOf(sp) > -1) {
                 splitor = sp;
                 break;
             }
         }
-        for (let sign_header of fengyun_dyjsb_signheader.split(splitor)) {
-            if (sign_header) {
-                if (signheaderArr)
-                    signheaderArr.push(sign_header)
+        for (let cookie of fengyun_dyjsb_cookie.split(splitor)) {
+            if (!cookie) {
+                cookieArr.push(cookie)
             }
         }
-        $.log(`fengyun_dyjsb_signheader 共找到 ${signheaderArr.length}个`)
+        $.log(`${$.name} 共找到cookie ${cookieArr.length}个`)
+        return true;
     } else {
-        console.log(`${$.name} 未找到 dyjsbcookie`)
+        console.log(`${$.name} 未找到 fengyun_dyjsb_cookie`)
         return false;
     }
 }
