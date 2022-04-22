@@ -52,6 +52,7 @@ async function GetRewrite() {
             let data = $.getdata('fengyun_dyjsb_cookie')
             //cookieArr 不存在该值就添加
             if (cookieArr.indexOf(cookie) == -1) {
+                console.log(data)
                 if (data) {
                     $.setdata(cookie, `fengyun_dyjsb_cookie`)
                 } else {
