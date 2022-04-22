@@ -14,8 +14,6 @@ const TASK_WAIT_TIME = 100
 let AllMessage = ''
 let envSplitor = ['#']
 
-$.idx = ($.idx = ($.isNode() ? process.env.dyjsb_count : $.getdata('dyjsb_count')) || '1' - 1) > 0 ? `${$.idx + 1}` : ""; // 账号扩展字符
-
 let fengyun_dyjsb_cookie = ($.isNode() ? process.env.fengyun_dyjsb_signcookie : $.getdata('fengyun_dyjsb_cookie')) || '';
 let fengyun_dyjsb_host = ($.isNode() ? process.env.fengyun_dyjsb_host : $.getdata('fengyun_dyjsb_host')) || 'api5-normal-c-lq.amemv.com';
 
@@ -56,13 +54,13 @@ async function GetRewrite() {
             //cookieArr 不存在该值就添加
             if (cookieArr.indexOf(cookie) == -1) {
                 if (data) {
+                    $.setdata(cookie, `fengyun_dyjsb_cookie`)
+                } else {
                     let newcookie = data + '#' + cookie
                     $.setdata(newcookie, `fengyun_dyjsb_cookie`)
-                } else {
-                    $.setdata(cookie, `fengyun_dyjsb_cookie`)
                 }
-                $.log(`[${$.name}] 获取cookie请求成功 stepheader:\n${cookie}\n`)
-                $.msg(`[${$.name}] 获取cookie成功🎉`, ``)
+                $.log(`[${$.name}] 获取第${cookieArr.length + 1}个cookie请求成功 stepheader:\n${cookie}\n`)
+                $.msg(`[${$.name}] 获取第${cookieArr.length + 1}个cookie成功🎉`, ``)
             }
         }
         if (dyhost) {
