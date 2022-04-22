@@ -52,13 +52,12 @@ async function GetRewrite() {
             let data = $.getdata('fengyun_dyjsb_cookie')
             //cookieArr 不存在该值就添加
             if (cookieArr.indexOf(cookie) == -1) {
-                console.log(data)
                 if (data) {
-                    $.setdata(cookie, `fengyun_dyjsb_cookie`)
-                } else {
                     let newcookie = data + '#' + cookie
                     $.setdata(newcookie, `fengyun_dyjsb_cookie`)
                     $.log(`${newcookie}`)
+                } else {
+                    $.setdata(cookie, `fengyun_dyjsb_cookie`)
                 }
                 $.log(`[${$.name}] 获取第${cookieArr.length + 1}个cookie请求成功 stepheader:\n${cookie}\n`)
                 $.msg(`[${$.name}] 获取第${cookieArr.length + 1}个cookie成功🎉`, ``)
