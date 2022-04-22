@@ -55,7 +55,6 @@ async function GetRewrite() {
                 if (data) {
                     let newcookie = data + '#' + cookie
                     $.setdata(newcookie, `fengyun_dyjsb_cookie`)
-                    $.log(`${newcookie}`)
                 } else {
                     $.setdata(cookie, `fengyun_dyjsb_cookie`)
                 }
