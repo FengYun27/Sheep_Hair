@@ -57,7 +57,7 @@ async function GetRewrite() {
             if (data) {
                 $.setdata(data + '#' + cookie, `fengyun_dyjsb_cookie`)
             } else {
-                $.setdata(cookie, `fengyun_dyjsb_signheader`)
+                $.setdata(cookie, `fengyun_dyjsb_cookie`)
             }
             $.log(`[${$.name}] 获取cookie请求成功 stepheader:\n${cookie}\n`)
             $.msg(`[${$.name}] 获取cookie成功🎉`, ``)
