@@ -27,6 +27,7 @@ const cookieArr = [];
 
 !(async () => {
     if (typeof $request !== "undefined") {
+        await CheckEnv()
         await GetRewrite()
     } else {
         if (!(await CheckEnv())) return;
@@ -52,21 +53,25 @@ async function GetRewrite() {
         const dyhost = $request.headers['Host']
         if (cookie) {
             let data = $.getdata('fengyun_dyjsb_cookie')
-            if (!data) {
-                $.setdata(data + '#' + cookie, `fengyun_dyjsb_cookie`)
-            } else {
-                $.setdata(cookie, `fengyun_dyjsb_cookie`)
+            //cookieArr 不存在该值就添加
+            if (cookieArr.indexOf(cookie) == -1) {
+                if (data) {
+                    let newcookie = data + '#' + cookie
+                    $.setdata(newcookie, `fengyun_dyjsb_cookie`)
+                } else {
+                    $.setdata(cookie, `fengyun_dyjsb_cookie`)
+                }
+                $.log(`[${$.name}] 获取cookie请求成功 stepheader:\n${cookie}\n`)
+                $.msg(`[${$.name}] 获取cookie成功🎉`, ``)
             }
-            $.log(`[${$.name}] 获取cookie请求成功 stepheader:\n${cookie}\n`)
-            $.msg(`[${$.name}] 获取cookie成功🎉`, ``)
         }
         if (dyhost) {
             let data = $.getdata('fengyun_dyjsb_host')
             if (data) {
                 $.setdata(dyhost, `fengyun_dyjsb_host`)
+                $.log(`[${$.name}] 获取host请求成功 stepheader:\n${dyhost}\n`)
+                $.msg(`[${$.name}] 获取host成功🎉`, ``)
             }
-            $.log(`[${$.name}] 获取host请求成功 stepheader:\n${dyhost}\n`)
-            $.msg(`[${$.name}] 获取host成功🎉`, ``)
         }
     }
 }
@@ -74,7 +79,7 @@ async function GetRewrite() {
 async function CheckEnv() {
     //console.log(`============ 脚本执行-国际标准时间(UTC)：${new Date().toLocaleString()}  =============\n`)
     //console.log(`============ 脚本执行-北京时间(UTC+8)：${new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toLocaleString()}  =============\n`)
-    $.log(`该脚本的所有环境变量只能用 # 隔开`)
+    //$.log(`该脚本的所有环境变量只能用 # 隔开`)
 
     if (fengyun_dyjsb_cookie) {
         let splitor = envSplitor[0];
@@ -85,7 +90,7 @@ async function CheckEnv() {
             }
         }
         for (let cookie of fengyun_dyjsb_cookie.split(splitor)) {
-            if (!cookie) {
+            if (cookie) {
                 cookieArr.push(cookie)
             }
         }
