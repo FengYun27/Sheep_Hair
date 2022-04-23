@@ -1853,7 +1853,7 @@ function gotifyNotify (text, desp) {
                         }
                     }
                 } catch (e) {
-                    $.logErr(e, resp);
+                    console.logErr(e, resp);
                 }
                 finally {
                     resolve();
@@ -1895,7 +1895,7 @@ function gobotNotify (text, desp, time = 2100) {
                             }
                         }
                     } catch (e) {
-                        $.logErr(e, resp);
+                        console.logErr(e, resp);
                     }
                     finally {
                         resolve(data);
@@ -1940,7 +1940,7 @@ function serverNotify (text, desp, time = 2100) {
                             }
                         }
                     } catch (e) {
-                        $.logErr(e, resp);
+                        console.logErr(e, resp);
                     }
                     finally {
                         resolve(data);
@@ -1979,7 +1979,7 @@ function BarkNotify (text, desp, params = {}) {
                         }
                     }
                 } catch (e) {
-                    $.logErr(e, resp);
+                    console.logErr(e, resp);
                 }
                 finally {
                     resolve();
@@ -2035,7 +2035,7 @@ function tgBotNotify (text, desp) {
                         }
                     }
                 } catch (e) {
-                    $.logErr(e, resp);
+                    console.logErr(e, resp);
                 } finally {
                     resolve(data);
                 }
@@ -2082,7 +2082,7 @@ function ddBotNotify (text, desp) {
                         }
                     }
                 } catch (e) {
-                    $.logErr(e, resp);
+                    console.logErr(e, resp);
                 }
                 finally {
                     resolve(data);
@@ -2103,7 +2103,7 @@ function ddBotNotify (text, desp) {
                         }
                     }
                 } catch (e) {
-                    $.logErr(e, resp);
+                    console.logErr(e, resp);
                 }
                 finally {
                     resolve(data);
@@ -2145,7 +2145,7 @@ function qywxBotNotify (text, desp) {
                         }
                     }
                 } catch (e) {
-                    $.logErr(e, resp);
+                    console.logErr(e, resp);
                 }
                 finally {
                     resolve(data);
@@ -2287,7 +2287,7 @@ function qywxamNotify (text, desp, strsummary = "") {
                             }
                         }
                     } catch (e) {
-                        $.logErr(e, resp);
+                        console.logErr(e, resp);
                     }
                     finally {
                         resolve(data);
@@ -2333,7 +2333,7 @@ function iGotNotify (text, desp, params = {}) {
                         }
                     }
                 } catch (e) {
-                    $.logErr(e, resp);
+                    console.logErr(e, resp);
                 }
                 finally {
                     resolve(data);
@@ -2380,7 +2380,7 @@ function pushPlusNotifyhxtrip (text, desp) {
                         }
                     }
                 } catch (e) {
-                    $.logErr(e, resp);
+                    console.logErr(e, resp);
                 }
                 finally {
                     resolve(data);
@@ -2430,7 +2430,7 @@ function pushPlusNotify (text, desp) {
                         }
                     }
                 } catch (e) {
-                    $.logErr(e, resp);
+                    console.logErr(e, resp);
                 }
                 finally {
                     resolve(data);
@@ -2524,7 +2524,7 @@ function wxpusherNotifyByOne (text, desp, strsummary = "") {
                         }
                     }
                 } catch (e) {
-                    $.logErr(e, resp);
+                    console.logErr(e, resp);
                 }
                 finally {
                     resolve(data);
@@ -2580,7 +2580,7 @@ function wxpusherNotify (text, desp) {
                         }
                     }
                 } catch (e) {
-                    $.logErr(e, resp);
+                    console.logErr(e, resp);
                 }
                 finally {
                     resolve(data);
@@ -2643,7 +2643,7 @@ function GetnickName () {
         $.get(options, (err, resp, data) => {
             try {
                 if (err) {
-                    $.logErr(err)
+                    console.logErr(err)
                 } else {
                     if (data) {
                         data = JSON.parse(data);
@@ -2655,11 +2655,11 @@ function GetnickName () {
                         }
 
                     } else {
-                        $.log('京东服务器返回空数据');
+                        console.log('京东服务器返回空数据');
                     }
                 }
             } catch (e) {
-                $.logErr(e)
+                console.logErr(e)
             }
             finally {
                 resolve();
@@ -2685,7 +2685,7 @@ function GetnickName2 () {
         $.post(options, (err, resp, data) => {
             try {
                 if (err) {
-                    $.logErr(err);
+                    console.logErr(err);
                 } else {
                     if (data) {
                         data = JSON.parse(data);
@@ -2698,11 +2698,11 @@ function GetnickName2 () {
                             $.nickName = userInfo.petName;
                         }
                     } else {
-                        $.log('京东服务器返回空数据');
+                        console.log('京东服务器返回空数据');
                     }
                 }
             } catch (e) {
-                $.logErr(e);
+                console.logErr(e);
             }
             finally {
                 resolve();
@@ -2976,7 +2976,7 @@ function Env (t, s) {
         }
         logErr (t, s) {
             const e = !this.isSurge() && !this.isQuanX() && !this.isLoon();
-            e ? $.log('', `\u2757\ufe0f${this.name}, \u9519\u8bef!`, t.stack) : $.log('', `\u2757\ufe0f${this.name}, \u9519\u8bef!`, t);
+            e ? console.log('', `\u2757\ufe0f${this.name}, \u9519\u8bef!`, t.stack) : console.log('', `\u2757\ufe0f${this.name}, \u9519\u8bef!`, t);
         }
         wait (t) {
             return new Promise((s) => setTimeout(s, t));
