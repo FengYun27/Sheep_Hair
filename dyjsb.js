@@ -26,7 +26,7 @@ let userCount = 0
 const readcookieArr = [], stepcookieArr = [];
 
 class UserAction {
-    constructor(step,read) {
+    constructor(step, read) {
         this.aid = '2329'
         this.step = JSON.parse(step)
         this.cookie = JSON.parse(read)
@@ -389,7 +389,7 @@ async function CheckEnv() {
         }
         for (let cookie of fengyun_dyjsb_stepcookie.split(splitor)) {
             if (cookie) {
-                cookieArr.push(cookie)
+                stepcookieArr.push(cookie)
             }
         }
         //console.log(`${$.name} 共找到cookie ${cookieArr.length}个`)
@@ -409,7 +409,7 @@ async function CheckEnv() {
         }
         for (let cookie of fengyun_dyjsb_readcookie.split(splitor)) {
             if (cookie) {
-                cookieArr.push(cookie)
+                readcookieArr.push(cookie)
             }
         }
         //console.log(`${$.name} 共找到cookie ${cookieArr.length}个`)
@@ -423,10 +423,11 @@ async function CheckEnv() {
         console.log(`${$.name} 未找到 fengyun_dyjsb_keys`)
         success = false;
     } else {
-        cookieArr.forEach((item) => {
-            userList.push(new UserAction(item))
-        })
-        userCount = cookieArr.length
+        for (let index = 0; index < stepcookieArr.length; index++) {
+            userList.push(new UserAction(item, readcookieArr[index]))
+        }
+
+        userCount = readcookieArr.length
     }
 
     return success;
