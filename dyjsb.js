@@ -424,7 +424,7 @@ async function CheckEnv() {
         success = false;
     } else {
         for (let index = 0; index < stepcookieArr.length; index++) {
-            userList.push(new UserAction(item, readcookieArr[index]))
+            userList.push(new UserAction(stepcookieArr[index], readcookieArr[index]))
         }
 
         userCount = readcookieArr.length
