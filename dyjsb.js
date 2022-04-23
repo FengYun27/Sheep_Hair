@@ -23,7 +23,7 @@ let userList = []
 let userIndex = 1
 let userCount = 0
 
-const readcookieArr = [], walkcookie = [];
+const readcookieArr = [], stepcookieArr = [];
 
 class UserAction {
     constructor(step,read) {
@@ -334,7 +334,7 @@ async function GetRewrite() {
         if (cookie) {
             let data = $.getdata('fengyun_dyjsb_readcookie')
             //cookieArr 不存在该值就添加
-            if (cookieArr.indexOf(cookie) == -1) {
+            if (readcookieArr.indexOf(cookie) == -1) {
                 if (data) {
                     let newcookie = data + '#' + cookie
                     $.setdata(newcookie, `fengyun_dyjsb_readcookie`)
@@ -359,7 +359,7 @@ async function GetRewrite() {
         if (cookie) {
             let data = $.getdata('fengyun_dyjsb_stepcookie')
             //cookieArr 不存在该值就添加
-            if (cookieArr.indexOf(cookie) == -1) {
+            if (stepcookieArr.indexOf(cookie) == -1) {
                 if (data) {
                     let newcookie = data + '#' + cookie
                     $.setdata(newcookie, `fengyun_dyjsb_stepcookie`)
