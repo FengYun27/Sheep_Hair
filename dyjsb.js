@@ -341,8 +341,8 @@ async function GetRewrite() {
                 } else {
                     $.setdata(cookie, `fengyun_dyjsb_readcookie`)
                 }
-                console.log(`[${$.name}] 获取第${cookieArr.length + 1}个readcookie请求成功\n${cookie}\n`)
-                $.msg(`[${$.name}] 获取第${cookieArr.length + 1}个readcookie成功🎉`, ``)
+                console.log(`[${$.name}] 获取第${readcookieArr.length + 1}个readcookie请求成功\n${cookie}\n`)
+                $.msg(`[${$.name}] 获取第${readcookieArr.length + 1}个readcookie成功🎉`, ``)
             }
         }
         if (readKyes) {
@@ -366,8 +366,8 @@ async function GetRewrite() {
                 } else {
                     $.setdata(cookie, `fengyun_dyjsb_stepcookie`)
                 }
-                console.log(`[${$.name}] 获取第${cookieArr.length + 1}个stepcookie请求成功\n${cookie}\n`)
-                $.msg(`[${$.name}] 获取第${cookieArr.length + 1}个stepcookie成功🎉`, ``)
+                console.log(`[${$.name}] 获取第${stepcookieArr.length + 1}个stepcookie请求成功\n${cookie}\n`)
+                $.msg(`[${$.name}] 获取第${stepcookieArr.length + 1}个stepcookie成功🎉`, ``)
             }
         }
     }
