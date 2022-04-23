@@ -4,6 +4,7 @@ hostname = *.amemv.com
 
 [rewrite local]
 luckycat/aweme/v1/task/done/read? url script-request-header https://raw.githubusercontent.com/FengYun27/Sheep_Hair/main/dyjsb.js
+luckycat/aweme/v1/task/walk/step_submit? url script-request-header https://raw.githubusercontent.com/FengYun27/Sheep_Hair/main/dyjsb.js
 */
 const $ = new Env('抖音极速版')
 const notify = $.isNode() ? require('./sendNotify') : '';
@@ -13,7 +14,8 @@ let AllMessage = ''
 let envSplitor = ['#']
 let httpResult, httpReq, httpResp;
 
-let fengyun_dyjsb_cookie = ($.isNode() ? process.env.fengyun_dyjsb_cookie : $.getdata('fengyun_dyjsb_cookie')) || '';
+let fengyun_dyjsb_stepcookie = ($.isNode() ? process.env.fengyun_dyjsb_stepcookie : $.getdata('fengyun_dyjsb_stepcookie')) || '';
+let fengyun_dyjsb_readcookie = ($.isNode() ? process.env.fengyun_dyjsb_readcookie : $.getdata('fengyun_dyjsb_readcookie')) || '';
 let fengyun_dyjsb_keys = ($.isNode() ? process.env.fengyun_dyjsb_keys : $.getdata('fengyun_dyjsb_keys')) || '';
 let dyhost = 'api5-normal-c-lq.amemv.com';
 
@@ -21,12 +23,13 @@ let userList = []
 let userIndex = 1
 let userCount = 0
 
-const cookieArr = [];
+const readcookieArr = [], walkcookie = [];
 
 class UserAction {
-    constructor(userCookie) {
+    constructor(step,read) {
         this.aid = '2329'
-        this.cookie = JSON.parse(userCookie)
+        this.step = JSON.parse(step)
+        this.cookie = JSON.parse(read)
         this.isLogin = true //是否登录
         this.sign_in_completed = false //签到任务的状态
         this.jiao_take_cash_completed = false //每日提现0.3的状态
@@ -35,8 +38,11 @@ class UserAction {
     }
 
     genderHeader() {
-        this.cookie['X-Khronos'] = Math.round(new Date().getTime() / 1000).toString();
-        this.cookie['tt-request-time'] = Math.round(new Date()).toString();
+        this.step['X-Khronos'] = Math.round(new Date().getTime() / 1000).toString();
+        this.step['tt-request-time'] = Math.round(new Date()).toString();
+
+        this.read['X-Khronos'] = Math.round(new Date().getTime() / 1000).toString();
+        this.read['tt-request-time'] = Math.round(new Date()).toString();
     }
 
     //开始任务
@@ -155,7 +161,7 @@ class UserAction {
         const time = Math.round(new Date().getTime() / 1000).toString();
         let url = `https://${dyhost}/luckycat/aweme/v1/task/walk/step_submit?aid=${this.aid}`
         let headers = {
-            Cookie: this.cookie.Cookie,
+            Cookie: this.step.Cookie,
             'User-Agent': 'AwemeLite 14.9.0 rv:149005 (iPhone; iOS 14.5; zh_CN) Cronet'
         }
         let body = `
@@ -183,7 +189,7 @@ class UserAction {
     async step_reward() {
         this.genderHeader()
         let url = `https://${dyhost}/luckycat/aweme/v1/task/walk/receive_step_reward?aid=${this.aid}`
-        let headers = this.cookie
+        let headers = this.step
         let body = `{"in_sp_time":0}`
         let urlObject = populateUrlObject(url, headers, body)
         await httpRequest('post', urlObject)
@@ -250,9 +256,9 @@ class UserAction {
             return
         }
         this.genderHeader()
-        let url = `https://${dyhost}/luckycat/aweme/v1/task/done/read?aid=${this.aid}`
+        let url = `https://${dyhost}/luckycat/aweme/v1/task/done/read?${fengyun_dyjsb_keys}`
         let headers = this.cookie
-        let body =`{
+        let body = `{
             "in_sp_time": 0,
             "task_key": "read"
         }`
@@ -322,31 +328,46 @@ class UserAction {
 // ===================================== 重写 ======================================= \\
 async function GetRewrite() {
     if ($request && $request.url.indexOf("aweme" && "read") >= 0) {
-        const urlkeys = $request.url.split(`?`)[1]
-        //let headers = $request.headers
-        //headers = headers.time.X-Khronos = ''
+        const readKyes = $request.url.split(`?`)[1]
         const cookie = JSON.stringify($request.headers)
 
         if (cookie) {
-            let data = $.getdata('fengyun_dyjsb_cookie')
+            let data = $.getdata('fengyun_dyjsb_readcookie')
             //cookieArr 不存在该值就添加
             if (cookieArr.indexOf(cookie) == -1) {
                 if (data) {
                     let newcookie = data + '#' + cookie
-                    $.setdata(newcookie, `fengyun_dyjsb_cookie`)
+                    $.setdata(newcookie, `fengyun_dyjsb_readcookie`)
                 } else {
-                    $.setdata(cookie, `fengyun_dyjsb_cookie`)
+                    $.setdata(cookie, `fengyun_dyjsb_readcookie`)
                 }
-                console.log(`[${$.name}] 获取第${cookieArr.length + 1}个cookie请求成功\n${cookie}\n`)
-                $.msg(`[${$.name}] 获取第${cookieArr.length + 1}个cookie成功🎉`, ``)
+                console.log(`[${$.name}] 获取第${cookieArr.length + 1}个readcookie请求成功\n${cookie}\n`)
+                $.msg(`[${$.name}] 获取第${cookieArr.length + 1}个readcookie成功🎉`, ``)
             }
         }
-        if (urlkeys) {
-            let data = $.getdata('fengyun_dyjsb_keys')
+        if (readKyes) {
+            let data = $.getdata('fengyun_dyjsb_readkey')
             if (!data) {
-                $.setdata(urlkeys, `fengyun_dyjsb_keys`)
-                console.log(`[${$.name}] 获取keys请求成功\n${urlkeys}\n`)
-                $.msg(`[${$.name}] 获取keys成功`, ``)
+                $.setdata(readKyes, `fengyun_dyjsb_readkey`)
+                console.log(`[${$.name}] 获取readkey请求成功\n${readKyes}\n`)
+                $.msg(`[${$.name}] 获取readkeys成功`, ``)
+            }
+        }
+    }
+    if ($request && $request.url.indexOf("aweme" && "step_submit") >= 0) {
+        const cookie = JSON.stringify($request.headers)
+        if (cookie) {
+            let data = $.getdata('fengyun_dyjsb_stepcookie')
+            //cookieArr 不存在该值就添加
+            if (cookieArr.indexOf(cookie) == -1) {
+                if (data) {
+                    let newcookie = data + '#' + cookie
+                    $.setdata(newcookie, `fengyun_dyjsb_stepcookie`)
+                } else {
+                    $.setdata(cookie, `fengyun_dyjsb_stepcookie`)
+                }
+                console.log(`[${$.name}] 获取第${cookieArr.length + 1}个stepcookie请求成功\n${cookie}\n`)
+                $.msg(`[${$.name}] 获取第${cookieArr.length + 1}个stepcookie成功🎉`, ``)
             }
         }
     }
@@ -358,15 +379,15 @@ async function CheckEnv() {
     //console.log(`============ 脚本执行-北京时间(UTC+8)：${new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toLocaleString()}  =============\n`)
     //console.log(`该脚本的所有环境变量只能用 # 隔开`)
 
-    if (fengyun_dyjsb_cookie) {
+    if (fengyun_dyjsb_stepcookie) {
         let splitor = envSplitor[0];
         for (let sp of envSplitor) {
-            if (fengyun_dyjsb_cookie.indexOf(sp) > -1) {
+            if (fengyun_dyjsb_stepcookie.indexOf(sp) > -1) {
                 splitor = sp;
                 break;
             }
         }
-        for (let cookie of fengyun_dyjsb_cookie.split(splitor)) {
+        for (let cookie of fengyun_dyjsb_stepcookie.split(splitor)) {
             if (cookie) {
                 cookieArr.push(cookie)
             }
@@ -374,7 +395,27 @@ async function CheckEnv() {
         //console.log(`${$.name} 共找到cookie ${cookieArr.length}个`)
         success = true;
     } else {
-        console.log(`${$.name} 未找到 fengyun_dyjsb_cookie`)
+        console.log(`${$.name} 未找到 fengyun_dyjsb_stepcookie`)
+        success = false;
+    }
+
+    if (fengyun_dyjsb_readcookie) {
+        let splitor = envSplitor[0];
+        for (let sp of envSplitor) {
+            if (fengyun_dyjsb_readcookie.indexOf(sp) > -1) {
+                splitor = sp;
+                break;
+            }
+        }
+        for (let cookie of fengyun_dyjsb_readcookie.split(splitor)) {
+            if (cookie) {
+                cookieArr.push(cookie)
+            }
+        }
+        //console.log(`${$.name} 共找到cookie ${cookieArr.length}个`)
+        success = true;
+    } else {
+        console.log(`${$.name} 未找到 fengyun_dyjsb_readcookie`)
         success = false;
     }
 
@@ -393,6 +434,7 @@ async function CheckEnv() {
 // ==================================== 请求 ===================================== \\
 function populateUrlObject(url, headers, body = '') {
     let host = url.replace('//', '/').split('/')[1]
+    headers.host = host
     let urlObject = {
         url: url,
         headers: headers,
