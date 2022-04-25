@@ -38,11 +38,15 @@ class UserAction {
     }
 
     genderHeader() {
-        this.step['X-Khronos'] = Math.round(new Date().getTime() / 1000).toString();
-        this.step['tt-request-time'] = Math.round(new Date()).toString();
+        if(this.step['X-Khronos']){
+            this.step['X-Khronos'] = Math.round(new Date().getTime() / 1000).toString();
+            this.step['tt-request-time'] = Math.round(new Date()).toString();
+        }
 
-        this.read['X-Khronos'] = Math.round(new Date().getTime() / 1000).toString();
-        this.read['tt-request-time'] = Math.round(new Date()).toString();
+        if(this.cookie['X-Khronos']){
+            this.cookie['X-Khronos'] = Math.round(new Date().getTime() / 1000).toString();
+            this.cookie['tt-request-time'] = Math.round(new Date()).toString();
+        }
     }
 
     //开始任务
@@ -263,8 +267,10 @@ class UserAction {
             "task_key": "read"
         }`
         let urlObject = populateUrlObject(url, headers, body)
-        console.log(urlObject)
         await httpRequest('post', urlObject)
+        console.log(httpReq)
+        console.log(httpResult)
+        console.log(httpResp)
         let result = httpResult;
         if (!result) return
         //console.log(result)
